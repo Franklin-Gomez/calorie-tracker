@@ -9,12 +9,19 @@ export default function Form() {
     calorias : 0
   })
 
+  const handleChange = (e : React.ChangeEvent<HTMLInputElement>  | React.ChangeEvent<HTMLSelectElement> ) => { 
+    setActivity( { 
+      ...activity,
+      [ e.target.id ] : e.target.value
+    })
+  }
+
   return (
 
     <form action="" className='space-y-5 bg-white p-10 rounded-lg'>
       <div className='grid grid-cols-1 gap-3'>
         <label htmlFor='category'> Categoria : </label>
-        <select className=' border border-slate-300 p-2 rounded-lg w-full bg-white' id='category' value={activity.category}>
+        <select className=' border border-slate-300 p-2 rounded-lg w-full bg-white' id='category' value={activity.category} onChange={ handleChange }>
 
           { categories.map( ( categoria ) => (
             <option
@@ -37,6 +44,7 @@ export default function Form() {
             className="border border-slate-300 p-2 rounded-lg"
             placeholder="Ej. Comida , Jugo de Naranja , Ensadla , Ejercico , Pesas , Bicicleta"
             value={activity.name}
+            onChange={handleChange}
           />
         </div>
 
@@ -49,6 +57,7 @@ export default function Form() {
             className="border border-slate-300 p-2 rounded-lg"
             placeholder="Ej. cantidad aproximadas 100 , 200..."
             value={activity.calorias}
+            onChange={handleChange}
           />
         </div>
 
