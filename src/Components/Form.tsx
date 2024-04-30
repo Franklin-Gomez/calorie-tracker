@@ -1,4 +1,3 @@
-import { act } from "react-dom/test-utils"
 import { categories } from "../db/categorias"
 import { useState } from "react"
 
@@ -16,7 +15,7 @@ export default function Form() {
     const isNumberfields = ['category' , 'calorias'].includes(e.target.id)
     setActivity( { 
       ...activity,
-      [ e.target.id ] : isNumberfields ? +isNumberfields : e.target.value
+      [ e.target.id ] : isNumberfields ? +e.target.value : e.target.value
     })
   }
 
@@ -73,7 +72,7 @@ export default function Form() {
         <input 
           type="submit" 
           className="bg-gray-800 hover:bg-gray-900 w-full p-2 font-bold uppercase text-white cursor-pointer disabled:opacity-10"  
-          value={'Guardar Comida o Guardar Ejercicio'} 
+          value={activity.category == 1 ? 'Guardar Comida' : 'Guardar Ejercicio' } 
           disabled = {!isValidActivity()}
         />
         
