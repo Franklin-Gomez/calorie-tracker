@@ -3,16 +3,19 @@ import { useState } from "react"
 
 export default function Form() {
 
-  const [ activity , setActivity ] = useState({
+  const [ activity , setActivity ] = useState< Activity>({
     category : 1,
     name : '',
     calorias : 0
   })
 
   const handleChange = (e : React.ChangeEvent<HTMLInputElement>  | React.ChangeEvent<HTMLSelectElement> ) => { 
+
+    // nos retorna true o false
+    const isNumberfields = ['category' , 'calorias'].includes(e.target.id)
     setActivity( { 
       ...activity,
-      [ e.target.id ] : e.target.value
+      [ e.target.id ] : isNumberfields ? +isNumberfields : e.target.value
     })
   }
 
