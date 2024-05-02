@@ -1,6 +1,6 @@
 
 // Actions
-type activityActions = { 
+export type activityActions = { 
     // descripcion ( type ) : informacion ( payload)
     type : 'save-activity' , payload : { newActivity : Activity } 
 }
@@ -22,9 +22,20 @@ export const activityReducer = (
         action : activityActions
     )  => { 
 
-    // ejecutar el codigo que nosotros seleccionamos
+    // Dispatch  - ejecutar el codigo que nosotros seleccionamos
     if(action.type === 'save-activity') { 
         // Este codigo maneja la logica para actualizar el state
+        
+
+        // return para devolver el estado actualizado
+        return { 
+            ...state,
+            activities : [...state.activities , action.payload.newActivity]
+            
+        }
+
     }
+
+    return state
      
 }

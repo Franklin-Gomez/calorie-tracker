@@ -1,21 +1,30 @@
 import { categories } from "../db/categorias"
-import { useState } from "react"
+import { Dispatch, useState } from "react"
+import { activityActions } from "../reducers/activity-reducer"
 
-export default function Form() {
 
-  const [ activity , setActivity ] = useState<Activity>({
-    category : 1,
-    name : '',
-    calorias : 0
-  })
+type FormProps = { 
+  dispatch : Dispatch<activityActions>
+}
+
+const initialState = { 
+  category : 1,
+  name : '',
+  calorias : 0
+}
+
+export default function Form( { dispatch } : FormProps) {
+
+  const [ activity , setActivity ] = useState<Activity>( initialState )
 
   const handleChange = (e : React.ChangeEvent<HTMLInputElement>  | React.ChangeEvent<HTMLSelectElement> ) => { 
 
     // nos retorna true o false
-    const isNumberfields = ['category' , 'calorias'].includes(e.target.id)
+    //const isNumberfields = ['category' , 'calorias'].includes(e.target.id)
     setActivity( { 
       ...activity,
-      [ e.target.id ] : isNumberfields ? +e.target.value : e.target.value
+      //[ e.target.id ] : isNumberfields ? +e.target.value : e.target.value
+      [ e.target.id ] : e.target.value
     })
   }
 
@@ -26,6 +35,10 @@ export default function Form() {
 
   const handleSubmit = ( e  : React.FormEvent<HTMLFormElement>)  => {
     e.preventDefault();
+
+    dispatch({ type: "save-activity" , payload : { newActivity : activity} })
+
+    setActivity(initialState) 
   } 
 
   return (
