@@ -1,5 +1,6 @@
-import { categories } from "../db/categorias"
 import { Dispatch, useState } from "react"
+import { v4 as uuidv4 } from 'uuid'
+import { categories } from "../db/categorias"
 import { activityActions } from "../reducers/activity-reducer"
 
 
@@ -7,7 +8,9 @@ type FormProps = {
   dispatch : Dispatch<activityActions>
 }
 
-const initialState = { 
+// valores y type para generar el objeto con la informacion
+const initialState : Activity = { 
+  id : uuidv4() ,
   category : 1,
   name : '',
   calorias : 0
@@ -38,7 +41,10 @@ export default function Form( { dispatch } : FormProps) {
 
     dispatch({ type: "save-activity" , payload : { newActivity : activity} })
 
-    setActivity(initialState) 
+    setActivity({
+      ...initialState,
+      id : uuidv4()
+    }) 
   } 
 
   return (
