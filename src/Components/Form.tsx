@@ -3,7 +3,7 @@ import { useState } from "react"
 
 export default function Form() {
 
-  const [ activity , setActivity ] = useState< Activity>({
+  const [ activity , setActivity ] = useState<Activity>({
     category : 1,
     name : '',
     calorias : 0
@@ -24,9 +24,13 @@ export default function Form() {
     return name.trim() !== '' && calorias > 0 
   }
 
+  const handleSubmit = ( e  : React.FormEvent<HTMLFormElement>)  => {
+    e.preventDefault();
+  } 
+
   return (
 
-    <form action="" className='space-y-5 bg-white p-10 rounded-lg'>
+    <form action="" className='space-y-5 bg-white p-10 rounded-lg' onSubmit={ handleSubmit }>
       <div className='grid grid-cols-1 gap-3'>
         <label htmlFor='category'> Categoria : </label>
         <select className=' border border-slate-300 p-2 rounded-lg w-full bg-white' id='category' value={activity.category} onChange={ handleChange }>
