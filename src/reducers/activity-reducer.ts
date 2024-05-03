@@ -1,19 +1,21 @@
-
 // Actions
-export type activityActions = { 
+export type activityActions = 
     // descripcion ( type ) : informacion ( payload)
-    type : 'save-activity' , payload : { newActivity : Activity } 
-}
+    { type : 'save-activity' , payload : { newActivity : Activity } }  |
+    { type : 'set-activeId' , payload : { id : Activity['id'] } }
+
 
 // type del reducer
 type ActivityState = { 
     // state  :  type
-    activities: Activity[]
+    activities: Activity[],
+    activeId : Activity['id']
 }
 
 // valores iniciales del state
 export const initialState : ActivityState = {
-    activities : []
+    activities : [],
+    activeId : ''
 }
 
 // reducer - conecta el actions con el state
@@ -34,6 +36,14 @@ export const activityReducer = (
             
         }
 
+    }
+
+    if( action.type == 'set-activeId') {
+
+        return { 
+            ...state,
+            activeId : action.payload.id
+        }
     }
 
     return state
