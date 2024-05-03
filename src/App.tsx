@@ -24,6 +24,7 @@ function App() {
 
           <Form 
             dispatch={dispatch}
+            state={state}
           />
 
         </div>

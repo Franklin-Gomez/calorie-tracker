@@ -1,11 +1,12 @@
-import { Dispatch, useState } from "react"
+import { Dispatch, useEffect, useState } from "react"
 import { v4 as uuidv4 } from 'uuid'
 import { categories } from "../db/categorias"
 import { activityActions } from "../reducers/activity-reducer"
-
+import { ActivityState } from "../reducers/activity-reducer"
 
 type FormProps = { 
   dispatch : Dispatch<activityActions>
+  state : ActivityState
 }
 
 // valores y type para generar el objeto con la informacion
@@ -16,9 +17,22 @@ const initialState : Activity = {
   calorias : 0
 }
 
-export default function Form( { dispatch } : FormProps) {
+export default function Form( { dispatch  , state} : FormProps) {
 
   const [ activity , setActivity ] = useState<Activity>( initialState )
+
+  useEffect(() => { 
+
+    // validamos que ya exista un id seleccionados 
+    if( state.activeId) { 
+      
+      // comparamos ambos state del reducer
+      const selecActivity = state.activities.filter(( stateActivity ) => stateActivity.id === state.activeId)[0];
+
+      setActivity( selecActivity )
+    }
+
+  } , [ state.activeId])
 
   const handleChange = (e : React.ChangeEvent<HTMLInputElement>  | React.ChangeEvent<HTMLSelectElement> ) => { 
 

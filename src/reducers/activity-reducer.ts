@@ -6,7 +6,7 @@ export type activityActions =
 
 
 // type del reducer
-type ActivityState = { 
+export type ActivityState = { 
     // state  :  type
     activities: Activity[],
     activeId : Activity['id']
