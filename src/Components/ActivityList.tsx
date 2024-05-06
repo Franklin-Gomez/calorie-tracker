@@ -10,6 +10,7 @@ type ActivityListProps = {
 
 export default function ActivityList( { activities , dispatch  } : ActivityListProps) {
 
+    // formatear categoria de 1 : comida  2 : ejercicio
     const categoryName = useMemo( () => 
         (category : Activity['category']) => categories.map( cat => cat.id === category ? cat.name : '') , [activities]);
 
