@@ -2,6 +2,7 @@ import Form from "./Components/Form"
 import { useEffect, useMemo, useReducer } from "react"
 import { initialState , activityReducer } from "./reducers/activity-reducer"
 import ActivityList from "./Components/ActivityList"
+import CaloriaTraker from "./Components/CaloriaTraker"
 
 function App() {
   
@@ -43,6 +44,14 @@ function App() {
             state={state}
           />
 
+        </div>
+      </section>
+
+      <section className="bg-gray-800 py-10">
+        <div className="max-w-4xl mx-auto">
+          <CaloriaTraker 
+            activities={state.activities}
+          />
         </div>
       </section>
 
