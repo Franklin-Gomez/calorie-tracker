@@ -21,7 +21,7 @@ export default function ActivityList( { activities , dispatch  } : ActivityListP
 
             { isEmptyActivities ? 
 
-                <p className=" text-center"> No hay Actividades Aun </p> :
+                <p className=" text-center my-5"> No hay Actividades Aun </p> :
 
                 activities.map( activity => ( 
 
