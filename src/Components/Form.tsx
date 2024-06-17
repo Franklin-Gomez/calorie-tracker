@@ -1,13 +1,8 @@
-import { Dispatch, useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import { v4 as uuidv4 } from 'uuid'
 import { categories } from "../db/categorias"
-import { activityActions } from "../reducers/activity-reducer"
-import { ActivityState } from "../reducers/activity-reducer"
-
-type FormProps = { 
-  dispatch : Dispatch<activityActions>
-  state : ActivityState
-}
+import { Activity } from "../types"
+import { useActivity } from "../Hooks/useActivity"
 
 // valores y type para generar el objeto con la informacion
 const initialState : Activity = { 
@@ -17,7 +12,9 @@ const initialState : Activity = {
   calorias : 0
 }
 
-export default function Form( { dispatch  , state} : FormProps) {
+export default function Form( ) {
+
+  const { state , dispatch } = useActivity()
 
   const [ activity , setActivity ] = useState<Activity>( initialState )
 
