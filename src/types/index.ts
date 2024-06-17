@@ -1,9 +1,9 @@
-type Categories =  {
+export type Categories =  {
     id : number , 
     name : string
 }
 
-type Activity = { 
+export type Activity = { 
     id : string
     category : number 
     name : string 
