@@ -1,12 +1,13 @@
 import Form from "./Components/Form"
-import { useEffect, useMemo, useReducer } from "react"
-import { initialState , activityReducer } from "./reducers/activity-reducer"
+import { useEffect, useMemo } from "react"
 import ActivityList from "./Components/ActivityList"
 import CaloriaTraker from "./Components/CaloriaTraker"
+import { useActivity } from "./Hooks/useActivity"
 
 function App() {
   
-  const [ state , dispatch ] = useReducer( activityReducer  , initialState)
+  // sacando la informacion del context con el CustomHook
+  const { state , dispatch } = useActivity()
 
   useEffect(() => { 
     localStorage.setItem('activities' , JSON.stringify(state.activities))
